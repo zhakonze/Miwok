@@ -1,8 +1,10 @@
 package com.example.android.miwok;
 
 import android.app.Activity;
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,9 +22,12 @@ public class WordAdapter extends ArrayAdapter<Word> {
     //@NonNull
     //@Override
 
-    public WordAdapter(Activity context, ArrayList<Word> words)
+    private int mColorRes;
+
+    public WordAdapter(Activity context,  ArrayList<Word> words, int ColorRes)
     {
         super(context, 0, words);
+        mColorRes = ColorRes;
 
     }
 
@@ -62,6 +67,10 @@ public class WordAdapter extends ArrayAdapter<Word> {
         }else {
             imageView.setVisibility(View.GONE);
         }
+
+        View textContainer = listItemView.findViewById(R.id.text_container);
+        int color  = ContextCompat.getColor(getContext(), mColorRes);
+        textContainer.setBackgroundColor(color);
 
         // Return the whole list item layout (containing 2 TextViews and an ImageView)
         // so that it can be shown in the ListView
